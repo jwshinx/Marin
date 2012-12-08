@@ -2,17 +2,20 @@ class MountainBike
  def initialize(params)
   set_state_from_hash(params)
  end
+
  def add_front_suspension(params)
   @type_code = :front_suspension
   set_state_from_hash(params)
  end
+
  def add_rear_suspension(params)
   unless @type_code == :front_suspension
-   raise 'you cant add rear sus unless you have front sus'
+   raise 'you cant add rear suspension unless you have front suspension'
   end
   @type_code = :full_suspension
   set_state_from_hash(params)
  end
+
  def off_road_ability
   result = @tire_width * TIRE_WIDTH_FACTOR
   if @type_code == :front_suspension || @type_code == :full_suspension
@@ -34,7 +37,9 @@ class MountainBike
     (1 + @commission) * @base_price + @front_suspension_price + @rear_suspension_price
   end
  end
+
 private
+
  def set_state_from_hash(hash)
   @base_price = hash[:base_price] if hash.has_key? :base_price
   if hash.has_key? :front_suspension_price
@@ -57,4 +62,5 @@ private
   end
   @type_code = hash[:type_code] if hash.has_key?(:type_code)
  end
+
 end
