@@ -1,4 +1,5 @@
 require 'rigid_mountain_bike'
+require 'front_suspension_mountain_bike'
 
 class MountainBike
  TIRE_WIDTH_FACTOR = 0.5 
@@ -14,12 +15,14 @@ class MountainBike
  def type_code=(value)
   @type_code = value
   @bike_type = case type_code
-   when :rigid then RigidMountainBike.new
+   when :rigid then RigidMountainBike.new( :tire_width => @tire_width )
+   when :front_suspension then FrontSuspensionMountainBike.new( :tire_width => @tire_width, :front_fork_travel => @front_fork_travel )
   end
  end
 
  def add_front_suspension(params)
   self.type_code = :front_suspension
+  @bike_type = FrontSuspensionMountainBike.new( {:tire_width => @tire_width}.merge(params) )
   set_state_from_hash(params)
  end
 
@@ -32,6 +35,8 @@ class MountainBike
  end
 
  def off_road_ability
+  return @bike_type.off_road_ability if type_code == :rigid
+  return @bike_type.off_road_ability if type_code == :front_suspension
   result = @tire_width * TIRE_WIDTH_FACTOR
   if type_code == :front_suspension || type_code == :full_suspension
    result += @front_fork_travel * FRONT_SUSPENSION_FACTOR
