@@ -8,7 +8,7 @@ describe "FrontSuspensionMountainBike" do
    puts "---> xxx: #{front_suspension_bike.inspect}"
   end
   it { front_suspension_bike.off_road_ability.should == 2.75 }
-  #it { basic_bike.price.should == 505 }
+  it { front_suspension_bike.price.should == 675 }
   #it { basic_bike.off_road_ability.should == 0.75 }
  end
 end
