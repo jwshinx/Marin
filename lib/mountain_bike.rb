@@ -1,3 +1,5 @@
+require 'rigid_mountain_bike'
+
 class MountainBike
  TIRE_WIDTH_FACTOR = 0.5 
  FRONT_SUSPENSION_FACTOR = 0.5 
@@ -11,6 +13,9 @@ class MountainBike
 
  def type_code=(value)
   @type_code = value
+  @bike_type = case type_code
+   when :rigid then RigidMountainBike.new
+  end
  end
 
  def add_front_suspension(params)

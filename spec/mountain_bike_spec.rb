@@ -6,11 +6,17 @@ describe "MountainBike" do
 
  describe "basic bike" do
   let(:basic_bike) { FactoryGirl.build(:basic_bike) }
+  it "xxx" do
+   pending
+   puts "---> xxx: #{basic_bike.inspect}"
+   basic_bike.bike_type.should be_true
+  end
   it { basic_bike.instance_variable_get(:@base_price) }
   it { basic_bike.instance_variable_get(:@front_suspension_price) }
   it { basic_bike.instance_variable_get(:@rear_suspension_price) }
   it { basic_bike.instance_variable_get(:@commission) }
   it { basic_bike.instance_variable_get(:@type_code) }
+  it { basic_bike.instance_variable_get(:@bike_type) }
   it { basic_bike.price.should == 505 }
   it { basic_bike.off_road_ability.should == 0.75 }
   describe "upgrade with front suspension" do
@@ -34,6 +40,7 @@ describe "MountainBike" do
   it { front_suspension_bike.instance_variable_get(:@rear_suspension_price) }
   it { front_suspension_bike.instance_variable_get(:@commission) }
   it { front_suspension_bike.instance_variable_get(:@type_code) }
+  it { front_suspension_bike.instance_variable_get(:@bike_type) }
   it { front_suspension_bike.price.should == 2450 }
   it { front_suspension_bike.off_road_ability.should == 3 }
   describe "upgrade with rear suspension" do
@@ -49,5 +56,6 @@ describe "MountainBike" do
   it { full_suspension_bike.instance_variable_get(:@rear_suspension_price) }
   it { full_suspension_bike.instance_variable_get(:@commission) }
   it { full_suspension_bike.instance_variable_get(:@type_code) }
+  it { full_suspension_bike.instance_variable_get(:@bike_type) }
  end
 end
