@@ -1,4 +1,8 @@
 class MountainBike
+ TIRE_WIDTH_FACTOR = 0.5 
+ FRONT_SUSPENSION_FACTOR = 0.5 
+ REAR_SUSPENSION_FACTOR = 0.5 
+
  def initialize(params)
   set_state_from_hash(params)
  end
@@ -52,13 +56,13 @@ private
    @commission = hash[:commission]
   end
   if hash.has_key? :tire_width
-   @tire_width == hash[:tire_width]
+   @tire_width = hash[:tire_width]
   end
   if hash.has_key? :front_fork_travel
-   @front_fork_travel == hash[:front_fork_travel]
+   @front_fork_travel = hash[:front_fork_travel]
   end
   if hash.has_key? :rear_fork_travel
-   @rear_fork_travel == hash[:rear_fork_travel]
+   @rear_fork_travel = hash[:rear_fork_travel]
   end
   @type_code = hash[:type_code] if hash.has_key?(:type_code)
  end
