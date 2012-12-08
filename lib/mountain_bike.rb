@@ -9,14 +9,19 @@ class MountainBike
  REAR_SUSPENSION_FACTOR = 0.5 
  
  extend Forwardable
- def_delegators :@bike_type, :off_road_ability
+ def_delegators :@bike_type, :off_road_ability, :price
 
- attr_reader :type_code
+ #attr_reader :type_code
 
- def initialize(params)
-  set_state_from_hash(params)
+ #def initialize(params)
+ def initialize(bike_type)
+  #set_state_from_hash(params)
+  @bike_type = bike_type
+  #puts "---> MB.init 1: #{@bike_type.inspect}"
+  #puts "---> MB.init 2: #{@bike_type.base_price}"
  end
 
+=begin
  def type_code=(value)
   @type_code = value
   @bike_type = case type_code
@@ -31,25 +36,37 @@ class MountainBike
     :rear_fork_travel => @rear_fork_travel, :rear_suspension_price => @rear_suspension_price )
   end
  end
+=end
 
  def add_front_suspension(params)
-  self.type_code = :front_suspension
-  @bike_type = FrontSuspensionMountainBike.new( 
-   {:tire_width => @tire_width, :base_price => @base_price, :commission => @commission}.merge(params) )
-  set_state_from_hash(params)
+  #puts "---> MB.add_front_sus 0: #{self.inspect}"
+  #puts "---> MB.add_front_sus 1: #{params.inspect}"
+  #puts "---> MB.add_front_sus 2: #{@bike_type.inspect}"
+  #puts "--->         #{@bike_type.tire_width}"
+  #puts "--->         #{@base_price}"
+  #puts "--->         #{@commission}"
+  #self.type_code = :front_suspension
+  @bike_type = FrontSuspensionMountainBike.new({ 
+   :tire_width => @bike_type.tire_width, 
+   :base_price => @bike_type.base_price, 
+   :commission => @bike_type.commission
+  }.merge(params) )
+  #set_state_from_hash(params)
  end
 
  def add_rear_suspension(params)
-  unless type_code == :front_suspension
+  #unless type_code == :front_suspension
+  unless @bike_type.is_a?(FrontSuspensionMountainBike)
    raise 'you cant add rear suspension unless you have front suspension'
   end
-  self.type_code = :full_suspension
+  #self.type_code = :full_suspension
   @bike_type = FullSuspensionMountainBike.new( 
    {:tire_width => @tire_width, :base_price => @base_price, :commission => @commission, 
     :front_suspension_price => @front_suspension_price, :front_fork_travel => @front_fork_travel }.merge(params) )
-  set_state_from_hash(params)
+  #set_state_from_hash(params)
  end
 
+=begin
  def off_road_ability
   return @bike_type.off_road_ability if type_code == :rigid
   return @bike_type.off_road_ability if type_code == :front_suspension
@@ -63,7 +80,9 @@ class MountainBike
   end
   result
  end
+=end
 
+=begin
  def price
   case type_code
    when :rigid
@@ -76,9 +95,21 @@ class MountainBike
     @bike_type.price
   end
  end
+=end
 
+ def to_s
+  %Q{
+   Bike Type: #{@bike_type.inspect}
+   Base Price: #{@bike_type.base_price}
+   Commission: #{@bike_type.commission}
+   Tire Width: #{@bike_type.tire_width}
+  }
+  # Front Sus: #{@bike_type.front_suspension_price} - #{@bike_type.front_fork_travel}
+  # Rear Sus: #{@bike_type.rear_suspension_price} - #{@bike_type.rear_fork_travel}
+ end
 private
 
+=begin
  def set_state_from_hash(hash)
   @base_price = hash[:base_price] if hash.has_key? :base_price
   if hash.has_key? :front_suspension_price
@@ -101,5 +132,6 @@ private
   end
   self.type_code = hash[:type_code] if hash.has_key?(:type_code)
  end
+=end
 
 end
