@@ -16,4 +16,14 @@ class FrontSuspensionMountainBike
  def price
   (1 + @commission) * @base_price + @front_suspension_price
  end
+ 
+ def upgradable_parameters
+  {
+   :tire_width => @tire_width,
+   :front_fork_travel => @front_fork_travel,
+   :front_suspension_price => @front_suspension_price,
+   :base_price => @base_price,
+   :commission => @commission
+  }
+ end
 end

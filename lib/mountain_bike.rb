@@ -34,11 +34,9 @@ class MountainBike
  end
 
  def add_front_suspension(params)
-  @bike_type = FrontSuspensionMountainBike.new({ 
-   :tire_width => @tire_width, 
-   :base_price => @base_price, 
-   :commission => @commission
-  }.merge(params) )
+  @bike_type = FrontSuspensionMountainBike.new(
+   @bike_type.upgradable_parameters.merge(params) 
+  )
  end
 
  def add_rear_suspension(params)
@@ -46,8 +44,8 @@ class MountainBike
    raise 'you cant add rear suspension unless you have front suspension'
   end
   @bike_type = FullSuspensionMountainBike.new( 
-   {:tire_width => @tire_width, :base_price => @base_price, :commission => @commission, 
-    :front_suspension_price => @front_suspension_price, :front_fork_travel => @front_fork_travel }.merge(params) )
+   @bike_type.upgradable_parameters.merge(params) 
+  )
  end
 
  def to_s
