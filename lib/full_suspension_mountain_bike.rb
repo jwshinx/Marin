@@ -18,7 +18,6 @@ class FullSuspensionMountainBike
  end
 
  def price
-  #puts "---> FuSMB.price: #{self.inspect}"
   (1 + @commission) * @base_price + @front_suspension_price + @rear_suspension_price
  end
 end

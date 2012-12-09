@@ -14,7 +14,6 @@ class FrontSuspensionMountainBike
  end
 
  def price
-  #puts "---> from FrSMB: #{self.inspect}"
   (1 + @commission) * @base_price + @front_suspension_price
  end
 end
