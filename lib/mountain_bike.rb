@@ -14,7 +14,6 @@ class MountainBike
  attr_reader :type_code
 
  def initialize(bike_type)
-  #set_state_from_hash(params)
   @bike_type = bike_type
  end
 

@@ -1,5 +1,4 @@
 class RigidMountainBike
- #attr_reader :base_price, :tire_width, :commission
 
  def initialize(params)
   @tire_width = params[:tire_width]

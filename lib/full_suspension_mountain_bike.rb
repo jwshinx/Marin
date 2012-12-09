@@ -1,5 +1,4 @@
 class FullSuspensionMountainBike
- #attr_reader :base_price, :tire_width, :commission, :front_fork_travel, :front_suspension_price, :rear_fork_travel, :rear_suspension_price
 
  def initialize(params)
   @tire_width = params[:tire_width]
