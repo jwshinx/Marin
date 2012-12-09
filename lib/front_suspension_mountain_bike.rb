@@ -1,4 +1,7 @@
+require 'pricer'
+
 class FrontSuspensionMountainBike
+ include Pricer
 
  def initialize(params)
   @tire_width = params[:tire_width]
@@ -13,16 +16,13 @@ class FrontSuspensionMountainBike
  end
 
  def price
-  (1 + @commission) * @base_price + @front_suspension_price
+  with_commission_factor * @base_price + @front_suspension_price
  end
  
  def upgradable_parameters
   {
-   :tire_width => @tire_width,
    :front_fork_travel => @front_fork_travel,
-   :front_suspension_price => @front_suspension_price,
-   :base_price => @base_price,
-   :commission => @commission
-  }
+   :front_suspension_price => @front_suspension_price
+  }.merge(basic_parameters)
  end
 end
