@@ -30,18 +30,18 @@ describe "MountainBike" do
   end
   describe "upgrade with front suspension" do
    ##before { basic_bike.add_front_suspension( { type_code: :front_suspension, front_suspension_price: 100, front_fork_travel: 2 } ) }
-   before { basic_bike.add_front_suspension( { front_suspension_price: 100, front_fork_travel: 2 } ) }
-=begin
+   #before { basic_bike.add_front_suspension( { basic_price: 500, tire_width: 1.5, commission: 0.05, front_suspension_price: 100, front_fork_travel: 2 } ) }
    it "zzz" do
     puts "---> zzz 1: #{basic_bike.inspect}"
-    basic_bike.add_front_suspension( { front_suspension_price: 100, front_fork_travel: 2 } ) 
+    #basic_bike.add_front_suspension( { front_suspension_price: 100, front_fork_travel: 2 } ) 
+    basic_bike.add_front_suspension( { base_price: 2000, tire_width: 1.5, commission: 0.05, front_suspension_price: 100, front_fork_travel: 2 } ) 
     puts "---> zzz 2: #{basic_bike.inspect}"
     puts "---> zzz 3: #{basic_bike.off_road_ability}"
+    puts "---> zzz 4: #{basic_bike.instance_variables}"
     basic_bike.price.should == 2200 
    end
-=end
-   it { basic_bike.price.should == 2200 }
-   it { basic_bike.off_road_ability.should == 1.75 }
+   #it { basic_bike.price.should == 2200 }
+   #it { basic_bike.off_road_ability.should == 1.75 }
   end
   describe "upgrade with rear suspension" do
    it "returns 'cant add rear sus without front sus' error message" do

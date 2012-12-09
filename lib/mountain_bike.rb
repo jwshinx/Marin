@@ -11,17 +11,14 @@ class MountainBike
  extend Forwardable
  def_delegators :@bike_type, :off_road_ability, :price
 
- #attr_reader :type_code
+ attr_reader :type_code
 
  #def initialize(params)
  def initialize(bike_type)
   #set_state_from_hash(params)
   @bike_type = bike_type
-  #puts "---> MB.init 1: #{@bike_type.inspect}"
-  #puts "---> MB.init 2: #{@bike_type.base_price}"
  end
 
-=begin
  def type_code=(value)
   @type_code = value
   @bike_type = case type_code
@@ -36,21 +33,20 @@ class MountainBike
     :rear_fork_travel => @rear_fork_travel, :rear_suspension_price => @rear_suspension_price )
   end
  end
-=end
 
  def add_front_suspension(params)
-  #puts "---> MB.add_front_sus 0: #{self.inspect}"
+  puts "---> MB.add_front_sus 0: #{self.inspect}"
   #puts "---> MB.add_front_sus 1: #{params.inspect}"
-  #puts "---> MB.add_front_sus 2: #{@bike_type.inspect}"
-  #puts "--->         #{@bike_type.tire_width}"
-  #puts "--->         #{@base_price}"
-  #puts "--->         #{@commission}"
+  puts "---> MB.add_front_sus 2: #{@bike_type.inspect}"
+  puts "--->         #{@base_price} - #{@tire_width} - #{@commission}"
   #self.type_code = :front_suspension
   @bike_type = FrontSuspensionMountainBike.new({ 
-   :tire_width => @bike_type.tire_width, 
-   :base_price => @bike_type.base_price, 
-   :commission => @bike_type.commission
+   :tire_width => @tire_width, 
+   :base_price => @base_price, 
+   :commission => @commission
   }.merge(params) )
+  puts "---> MB.add_front_sus 3: #{@bike_type.inspect}"
+  @bike_type
   #set_state_from_hash(params)
  end
 
@@ -100,10 +96,10 @@ class MountainBike
  def to_s
   %Q{
    Bike Type: #{@bike_type.inspect}
-   Base Price: #{@bike_type.base_price}
-   Commission: #{@bike_type.commission}
-   Tire Width: #{@bike_type.tire_width}
+   Base Price: #{@base_price}
+   Commission: #{@commission}
   }
+   #Tire Width: #{@tire_width}
   # Front Sus: #{@bike_type.front_suspension_price} - #{@bike_type.front_fork_travel}
   # Rear Sus: #{@bike_type.rear_suspension_price} - #{@bike_type.rear_fork_travel}
  end

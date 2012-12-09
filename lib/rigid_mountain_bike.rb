@@ -1,5 +1,5 @@
 class RigidMountainBike
- attr_reader :base_price, :tire_width, :commission
+ #attr_reader :base_price, :tire_width, :commission
 
  def initialize(params)
   #puts "---> RMB.init 1: #{params.inspect}"
